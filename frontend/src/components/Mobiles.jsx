@@ -1,9 +1,22 @@
-import React from "react";
-import list from "../../public/list.json";
+import React, { useEffect, useState } from "react";
 import Cards from "./Cards";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Mobiles() {
+  const [mobile, setMobile] = useState([]);
+  useEffect(() => {
+    const getMobile = async () => {
+      try {
+        const res = await axios.get("http://localhost:2000/mobile");
+        console.log(res.data);
+        setMobile(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getMobile();
+  }, []);
   return (
     <>
       <div className="max-w-screen-2xl container mx-auto md:px-20 px-4">
@@ -20,17 +33,15 @@ function Mobiles() {
             quibusdam error qui sapiente enim tenetur laborum officiis.
           </p>
           <Link to={"/"}>
-          <button className="bg-orange-500 text-white px-4 py-2 mt-9 rounded-md hover:bg-orange-600">
-            Back
-          </button>
+            <button className="bg-orange-500 text-white px-4 py-2 mt-9 rounded-md hover:bg-orange-600">
+              Back
+            </button>
           </Link>
         </div>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3">
-          {
-            list.map((item)=>(
-              <Cards key={item.id} item={item} />
-            ))
-          }
+          {mobile.map((item) => (
+            <Cards key={item.id} item={item} />
+          ))}
         </div>
       </div>
     </>

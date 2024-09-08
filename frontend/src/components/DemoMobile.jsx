@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import list from "../../public/list.json";
 import Cards from "./Cards";
+import axios from "axios";
 
 function DemoMobile() {
-  const filterData = list.filter((data) => data.category === "OnePlus");
+  const [mobile, setMobile] = useState([]);
+  useEffect(() => {
+    const getMobile = async () => {
+      try {
+        const res = await axios.get("http://localhost:2000/mobile");
+
+        const data = res.data.filter((data) => data.category === "OnePlus");
+        console.log(data);
+        setMobile(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getMobile();
+  }, []);
+
   var settings = {
     dots: true,
     infinite: false,
@@ -55,7 +70,7 @@ function DemoMobile() {
         </div>
         <div>
           <Slider {...settings}>
-            {filterData.map((item) => (
+            {mobile.map((item) => (
               <Cards key={item.id} item={item} />
             ))}
           </Slider>
