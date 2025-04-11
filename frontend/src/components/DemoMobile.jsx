@@ -10,7 +10,7 @@ function DemoMobile() {
   useEffect(() => {
     const getMobile = async () => {
       try {
-        const res = await axios.get("http://localhost:2000/mobile");
+        const res = await axios.get("https://mobilestorebackend-w7gs.onrender.com/mobile");
 
         const data = res.data.filter((data) => data.category === "OnePlus");
         console.log(data);

@@ -8,7 +8,7 @@ function Mobiles() {
   useEffect(() => {
     const getMobile = async () => {
       try {
-        const res = await axios.get("http://localhost:2000/mobile");
+        const res = await axios.get("https://mobilestorebackend-w7gs.onrender.com/mobile");
         console.log(res.data);
         setMobile(res.data);
       } catch (error) {

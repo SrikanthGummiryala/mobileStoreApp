@@ -17,7 +17,7 @@ function Login() {
       password: data.password,
     };
     await axios
-      .post("http://localhost:2000/user/login", userInfo)
+      .post("https://mobilestorebackend-w7gs.onrender.com/user/login", userInfo)
       .then((res) => {
         console.log(res.data);
         if (res.data) {
